@@ -5,10 +5,13 @@ from pybricks.ev3devices import Motor, TouchSensor, ColorSensor
 from pybricks.parameters import Port, Stop, Direction
 from pybricks.tools import wait
 
-# Configure the gripper motor on Port A.
-gripper_motor = Motor(Port.A)
+###################################
+# CONFIGURING MOTORS AND SENSORS  #
+###################################
 
+# Configure the gripper motor on Port A.
 # Configure the track motor on Port D.
+gripper_motor = Motor(Port.A)
 trackMotor = Motor(Port.D)
 
 # Configure the elbow motor. It has an 8-teeth and a 40-teeth gear
@@ -32,6 +35,10 @@ base_switch = TouchSensor(Port.S1)
 # is in the starting position. This is when the sensor sees the
 # white beam up close.
 elbow_sensor = ColorSensor(Port.S3)
+
+###################################
+# INITIALIZATION                  #
+###################################
 
 # Initialize the elbow. First make it go down for 500 ms.
 # Then make it go upwards slowly (15 degrees per second) until
@@ -62,8 +69,13 @@ gripper_motor.run_until_stalled(200, Stop.COAST, 50)
 gripper_motor.reset_angle(0)
 gripper_motor.run_target(200, -90)
 
-# Run track
-trackMotor.run(140)
+# Run track (we want track to run continuously)
+trackMotor.run(140) 
+
+###########################################
+#   DEFINING FUNCTIONS  AND DESTINATIONS  #
+###########################################
+
 
 def robot_pick(position):
     # This function makes the robot base rotate to the indicated
